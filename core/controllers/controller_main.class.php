@@ -12,7 +12,7 @@ class Controller_Main extends Controller{
         $offset = 0;
         //TODO получить данные из $_GET
         $d = new DateTime('now');
-        $today = $d->format('d-m-Y');
+        $today = $d->format('Y-m-d');
 
         $events_data = $this->_link->
                                     select('events', ['id', 'event_title', 'creator', 'event_ava', 'event_description', 'date_create', 'date_event', 'event_participants','event_place'])->
