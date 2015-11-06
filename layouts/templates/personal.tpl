@@ -1,21 +1,21 @@
 <?php
-    if(empty($this->content['events'])):
-        ?>
-<div class="col-md-8">
+if(empty($this->content['events'])):
+    ?>
+    <div class="col-md-8">
 
-    <div class="alert alert-danger">
-        <p>Нет событий</p>
+        <div class="alert alert-danger">
+            <p>Нет событий</p>
+        </div>
     </div>
-</div>
 
-        <?php
-    else:
-        ?>
-        <div class="row">
-            <div class="col-md-12">
-        <?php
-        foreach($this->content['events'] as $event):
-            ?>
+    <?php
+else:
+    ?>
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            foreach($this->content['events'] as $event):
+                ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><?= $event['event_title']?></h3>
@@ -32,12 +32,12 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-            <?php
-        endforeach;
-        ?>
-            </div>
+                <?php
+            endforeach;
+            ?>
         </div>
-        <?php
-    endif;
-    //TODO добавить пагинацию
+    </div>
+    <?php
+endif;
+//TODO добавить пагинацию
 ?>

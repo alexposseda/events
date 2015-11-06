@@ -41,6 +41,8 @@ class Controller_Main extends Controller{
             if(is_null($event_data)){
                 $this->show404();
             }else{
+                $creator = $this->_link->select('users', ['login'])->selectWHERE('id', $event_data['creator'])->sendSelectQuery()->fetch_assoc();
+                $event_data['creator'] = $creator['login'];
                 $this->content['event_data'] = $event_data;
                 $this->page_data['title'] = $event_data['event_title'];
 
@@ -52,16 +54,22 @@ class Controller_Main extends Controller{
     }
     public function signin(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $ref = $_SERVER['HTTP_REFERER'];
             $email = $_POST['email'];
             $password = md5(Config::SECRET.$_POST['password']);
             if(Auth::signIn($email, $password)){
-                header('Location: /');
+                header('Location: '.$ref);
             }else{
-                header('Location: /');
+                header('Location: '.$ref);
             }
         }else{
             $this->show404();
         }
+    }
+    public function logout(){
+        session_unset();
+        session_destroy();
+        header("location: /");
     }
     public function registration(){
         $form_data = array(

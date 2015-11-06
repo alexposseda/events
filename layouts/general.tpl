@@ -48,7 +48,10 @@
                 <button type="submit" class="btn btn-success">Sign in</button>
             </form>
             <?php else:?>
-                <p>Hello user!</p>
+                <div class="navbar-form navbar-right">
+                    <a href="/personal" class="btn btn-default">Мой кабинет</a>
+                    <a href="/main/logout" class="btn btn-danger">Выйти</a>
+                </div>
             <?php endif;?>
         </div><!--/.navbar-collapse -->
     </div>
@@ -63,8 +66,25 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
+            <?php if(Url::getUrlSegment(0) == 'personal'):?>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="/personal">Мои созданные встречи</a></li>
+                    <li><a href="/personal/myevents">Мои встречи</a></li>
+                    <li><a href="/personal/profile">Профиль</a></li>
+                </ul>
+            <?php endif;?>
             <?php include_once 'templates/'.$tpl.'.tpl'?>
+        </div>
+        <div class="col-md-3">
+            sidebar here
+            <?php if(Url::getUrlSegment(0) == 'personal'):?>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="/add/event" class="btn btn-success">Создать встречу</a>
+                    </div>
+                </div>
+            <?php endif;?>
         </div>
     </div>
 </div> <!-- /container -->
