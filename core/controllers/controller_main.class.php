@@ -52,7 +52,13 @@ class Controller_Main extends Controller{
     }
     public function signin(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            //todo check data
+            $email = $_POST['email'];
+            $password = md5(Config::SECRET.$_POST['password']);
+            if(Auth::signIn($email, $password)){
+                header('Location: /');
+            }else{
+                header('Location: /');
+            }
         }else{
             $this->show404();
         }

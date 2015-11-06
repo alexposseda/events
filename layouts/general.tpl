@@ -37,15 +37,19 @@
             <a class="navbar-brand" href="/main">Events</a>
         </div>
         <div class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="form">
+            <?php if(!Auth::checkAuth()):?>
+            <form class="navbar-form navbar-right" role="form" action="/main/signin" method="POST">
                 <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+                    <input type="email" placeholder="Email" class="form-control" name="email">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input type="password" placeholder="Password" class="form-control" name="password">
                 </div>
                 <button type="submit" class="btn btn-success">Sign in</button>
             </form>
+            <?php else:?>
+                <p>Hello user!</p>
+            <?php endif;?>
         </div><!--/.navbar-collapse -->
     </div>
 </div>
@@ -58,8 +62,11 @@
 </div>
 
 <div class="container">
-<?php include_once 'templates/'.$tpl.'.tpl'?>
-
+    <div class="row">
+        <div class="col-md-8">
+            <?php include_once 'templates/'.$tpl.'.tpl'?>
+        </div>
+    </div>
 </div> <!-- /container -->
 <div id="footer">
     <div class="container">

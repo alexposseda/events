@@ -1,7 +1,8 @@
 <?php
     if(empty($this->content['events'])):
         ?>
-<div class="row">
+<div class="col-md-8">
+
     <div class="alert alert-danger">
         <p>Нет событий</p>
     </div>

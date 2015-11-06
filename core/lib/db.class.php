@@ -35,7 +35,7 @@
 			return $this->_db->error;
 		}
 		public function sendSelectQuery(){
-			echo $this->_sql.'<br>';
+//			echo $this->_sql.'<br>';
 			$result = $this->_db->query($this->_sql);
 			$this->clearSql();
 			return $result;
