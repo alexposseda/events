@@ -36,24 +36,6 @@
             </button>
             <a class="navbar-brand" href="/main">Events</a>
         </div>
-        <div class="navbar-collapse collapse">
-            <?php if(!Auth::checkAuth()):?>
-            <form class="navbar-form navbar-right" role="form" action="/main/signin" method="POST">
-                <div class="form-group">
-                    <input type="email" placeholder="Email" class="form-control" name="email">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" name="password">
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
-            <?php else:?>
-                <div class="navbar-form navbar-right">
-                    <a href="/personal" class="btn btn-default">Мой кабинет</a>
-                    <a href="/main/logout" class="btn btn-danger">Выйти</a>
-                </div>
-            <?php endif;?>
-        </div><!--/.navbar-collapse -->
     </div>
 </div>
 
@@ -69,23 +51,61 @@
         <div class="col-md-9">
             <?php if(Url::getUrlSegment(0) == 'personal'):?>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="/personal">Мои созданные встречи</a></li>
-                    <li><a href="/personal/myevents">Мои встречи</a></li>
-                    <li><a href="/personal/profile">Профиль</a></li>
+                    <li class="active"><a href="/personal">Мои встречи</a></li>
+                    <li><a href="/personal/management">Управление встречами</a></li>
                 </ul>
             <?php endif;?>
             <?php include_once 'templates/'.$tpl.'.tpl'?>
         </div>
+        <!--sidebar -->
         <div class="col-md-3">
-            sidebar here
-            <?php if(Url::getUrlSegment(0) == 'personal'):?>
+            <?php if(!Auth::checkAuth()):?>
                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Вход</h3>
+                    </div>
                     <div class="panel-body">
-                        <a href="/add/event" class="btn btn-success">Создать встречу</a>
+                        <form class="form-horizontal" role="form" action="/main/signin" method="POST">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="email" placeholder="Email" class="form-control" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="password" placeholder="Password" class="form-control" name="password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success col-md-12">Sign in</button>
+                        </form>
+
+                    </div>
+                    <div class="panel-footer">
+                        <a href="/main/registration" class="btn btn-default col-md-12">Регистрация</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            <?php else:?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><a href="/personal"><?= $this->content['user_data']['login']?></a></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="/img/noavatar.png" alt="..." class="avatar">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="/add/event">Создать встречу</a> </li>
+                            <li class="list-group-item"><a href="/personal">Мои встречи</a></li>
+                            <li class="list-group-item"><a href="/personal/management">Управление встречами</a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="/main/logout" class="btn btn-danger col-md-12">Выход</a>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             <?php endif;?>
         </div>
+        <!-- end sidebar -->
     </div>
 </div> <!-- /container -->
 <div id="footer">

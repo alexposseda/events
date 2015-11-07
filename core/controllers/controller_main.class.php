@@ -1,11 +1,5 @@
 <?php
 class Controller_Main extends Controller{
-    protected $_link;
-
-    public function __construct(){
-        $this->_link = Db::getLink();
-    }
-
     public function index(){
         //TODO получить данные из $_GET
         $limit = 10;
@@ -73,8 +67,9 @@ class Controller_Main extends Controller{
     }
     public function registration(){
         $form_data = array(
-            'action'=>'/add/user',
+            'action'=>'/main/registration',
             'method'=>'POST',
+            'button_text'=>'Зарегистрироваться и войти',
             'fields'=>array(
                 array(
                     'field'=>'input',
@@ -105,7 +100,32 @@ class Controller_Main extends Controller{
                 )
             ),
         );
-        $this->content['form'] = new Form($form_data);
+        $this->form = new Form($form_data);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $validator = new Validator($_POST);
+            $required_fields = array();
+
+            foreach($form_data['fields'] as $field){
+                if($field['required'] == 1 && $field['field'] != 'file'){
+                    $required_fields[] = $field['name'];
+                }
+            }
+            if($validator->checkFieldsForEmpty($required_fields)->checkField('email', 'email')->checkField('login', 'uniq', 'users')->checkField('email', 'uniq', 'users')->validationResult()){
+                if($validator->getDataFromField('password') == $validator->getDataFromField('password_confirm')){
+                    $result = $this->_link->insertRow('users', ['login'=>$validator->getDataFromField('login'), 'password'=>md5(Config::SECRET.$validator->getDataFromField('password')), 'role' => 'user', 'email'=>$validator->getDataFromField('email')])->sendInsertQuery();
+                    if($result !== false){
+                        $_SESSION['user_id'] = $this->_link->getInsertId();
+                        $_SESSION['role'] = 'user';
+                        header("Location: /");
+                    }
+                }else{
+                    $this->form->errors['fields']['password'][] = 'Пароли не совпадают!';
+                    $this->form->errors['fields']['password_confirm'][] = 'Пароли не совпадают!';
+                }
+            }else{
+                $this->form->errors = $validator->getErrors();
+            }
+        }
 
         $this->page_data['title'] = 'Регистрация';
         $this->render('general', 'reg');

@@ -176,8 +176,4 @@
 			$this->_sql = 'DELETE FROM `'.Config::DB_PREFIX.$this->_db->real_escape_string($table).'` WHERE `id` = '.$this->_db->real_escape_string($id);
 			return $this;
 		}
-		public function updateTrainingDay($data, $phase_id, $day_num){
-			$this->_sql = "UPDATE `tim_training_day` SET `exercises`='".$data."' WHERE `phase_id`='".$phase_id."' AND `day_num`='".$day_num."'";
-			return $this;
-		}
 	}

@@ -5,6 +5,7 @@ class Form{
     public $enctype;
     public $fields;
     public $errors;
+    public $button_text;
 
     public function __construct($data){
         foreach($data as $key => $val){
@@ -14,14 +15,14 @@ class Form{
     public function getInpClass($inp_name){
         if (!empty($this->errors)) {
             if (isset($this->errors['fields'][$inp_name])) {
-                return 'inp-error';
+                return 'has-error';
             } else {
-                return 'inp-success';
+                return 'has-success';
             }
         }
     }
     public function showForm(){
-        //TODO show form
+        include 'layouts/templates/form.tpl';
     }
 }
 

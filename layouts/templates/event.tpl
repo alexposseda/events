@@ -16,7 +16,7 @@
         <span class="label label-default">Место провеления: <?= $event['event_place']?></span>
     </div>
     <div class="panel-body">
-        <img src="/storage/events/<?= $event['id']?>/<?= $event['event_big_img']?>" alt="" class="media-object pull-left media-object-big">
+        <img src="/<?= $event['event_big_img']?>" alt="" class="media-object pull-left media-object-big">
         <p><?= $event['event_data']?></p>
         <div class="clearfix"></div>
         <span class="label label-default">Участников: <?= $event['event_participants']?></span>
