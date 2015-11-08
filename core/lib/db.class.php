@@ -115,10 +115,7 @@
 			$this->_sql = substr($this->_sql, 0, -4);
 			return $this;
 		}
-		public function selectWHERE_LIKE($field, $param){
-			$this->_sql .= "WHERE `".$this->_db->real_escape_string($field)."` LIKE '".$this->_db->real_escape_string($param)."%'";
-			return $this;
-		}
+
 		public function selectWHERE_OR($params, $where = false){
 			if($where) {
 				$this->_sql .= 'WHERE ';
@@ -159,10 +156,6 @@
 			$this->_sql = "UPDATE `".Config::DB_PREFIX.$this->_db->real_escape_string($table)."` SET `".$this->_db->real_escape_string($field)."`= '".$this->_db->real_escape_string($field_data)."' WHERE `id` = '".$this->_db->real_escape_string($id)."'";
 			return $this;
 		}
-		public function updateRows($table,$field, $field_data, $param){
-			$this->_sql = "UPDATE `".Config::DB_PREFIX.$this->_db->real_escape_string($table)."` SET `".$this->_db->real_escape_string($field)."`= '".$this->_db->real_escape_string($field_data)."' WHERE `".$this->_db->real_escape_string($param['field'])."` = '".$this->_db->real_escape_string($param['data'])."'";
-			return $this;
-		}
 		public function update($table, $data, $id){
 			$update_data = '';
 			foreach($data as $field=>$value){
@@ -174,6 +167,11 @@
 		}
 		public function delete($table, $id){
 			$this->_sql = 'DELETE FROM `'.Config::DB_PREFIX.$this->_db->real_escape_string($table).'` WHERE `id` = '.$this->_db->real_escape_string($id);
+			return $this;
+		}
+
+		public function deleteRows($table, $field, $data){
+			$this->_sql = 'DELETE FROM `'.Config::DB_PREFIX.$this->_db->real_escape_string($table).'` WHERE `'.$this->_db->real_escape_string($field).'` = '.$this->_db->real_escape_string($data);
 			return $this;
 		}
 	}

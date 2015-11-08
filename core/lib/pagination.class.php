@@ -47,14 +47,14 @@ class Pagination{
 	}
 	public function getPrev(){
 		if($this->_offset > 0){
-			echo '<li class="pagination-prev"><a href="?offset='.($this->_offset-1).'"></a></li>';
+			echo '<li class="pagination-prev"><a href="'.Url::getUrl('offset').'offset='.($this->_offset-1).'"></a></li>';
 		}else{
 			echo '<li class="pagination-prev pagination-disabled"></li>';
 		}
 	}
 	public function getNext(){
 		if($this->_offset < $this->_pages_count-1){
-			echo '<li class="pagination-next"><a href="?offset='.($this->_offset+1).'"></a></li>';
+			echo '<li class="pagination-next"><a href="'.Url::getUrl('offset').'offset='.($this->_offset+1).'"></a></li>';
 		}else{
 			echo '<li class="pagination-next pagination-disabled"></li>';
 		}

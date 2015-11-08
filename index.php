@@ -11,4 +11,5 @@ function __autoload($class_name){
     }
     include_once ('core/'.$dir.$class_name.'.class.php');
 }
-Router::start();
+$router = new Router();
+$router->run();

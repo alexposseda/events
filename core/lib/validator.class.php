@@ -2,16 +2,20 @@
 class Validator{
     protected $_data;
     protected $_errors;
-    public function __construct($data){
-        $this->_data = $this->getSafeData($data);
+    public function __construct(){
+
     }
-    public function checkField($field, $rule, $table = false){
-        $this->$rule($field, $table);
+    public function setData($data){
+        $this->_data = $this->getSafeData($data);
         return $this;
     }
-    public function checkFields($fields, $rule){
-        foreach($fields as $field) {
-            $this->$rule($field);
+    public function checkFields($fields, $rule, $table = false){
+        if(is_array($fields)){
+            foreach($fields as $field) {
+                $this->$rule($field, $table);
+            }
+        }else{
+            $this->$rule($fields, $table);
         }
         return $this;
     }
@@ -34,18 +38,17 @@ class Validator{
     }
     public function getData($fields = false){
         if($fields !== false){
-            $data = array();
-            foreach($fields as $field){
-                $data[$field] = $this->_data[$field];
+            if(is_array($fields)) {
+                $data = array();
+                foreach ($fields as $field) {
+                    $data[$field] = $this->_data[$field];
+                }
+                return $data;
+            }else{
+                return $this->_data[$fields];
             }
-            return $data;
         }
         return $this->_data;
-    }
-    public function getDataFromField($field){
-        if(isset($this->_data[$field])){
-            return $this->_data[$field];
-        }
     }
     protected function uniq($field, $table, $field_data = false){
         $link = Db::getLink();
@@ -66,28 +69,6 @@ class Validator{
             }
         }
     }
-    public function checkTime($time){
-        if(!empty($time)) {
-            $time = $this->getSafeData($time);
-            if (!preg_match('/^([0-2]{1}\d{1}):\d{2}$/', $time)) {
-                $this->_errors['fields']['time'][] = 'wrong_time_format';
-            }
-        }else{
-            $this->_errors['fields']['time'][] = 'empty';
-        }
-        return $this;
-    }
-    protected function phone($field, $table=false){
-        if(!empty($this->_data[$field])){
-            if(!preg_match('/^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/', $this->_data[$field])){
-                $this->_errors['fields'][$field][] = 'wrong_phone_format';
-            }
-        }else {
-            if(!isset($field, $this->_errors['fields'][$field])) {
-                $this->_errors['fields'][$field][] = 'empty';
-            }
-        }
-    }
     protected function number($field, $table=false){
         if(!empty($this->_data[$field])){
             if(!is_numeric($this->_data[$field])){
@@ -99,15 +80,16 @@ class Validator{
             }
         }
     }
-    protected function getSafeData($data){
-        if(is_array($data)) {
-            if(!is_array($data)) {
+    protected function getSafeData($data)
+    {
+        if (is_array($data)) {
+            if (!is_array($data)) {
                 foreach ($data as $key => $val) {
                     $data[$key] = trim(htmlspecialchars($val));
                 }
             }
             return $data;
-        }else{
+        } else {
             return trim(htmlspecialchars($data));
         }
     }

@@ -1,62 +1,30 @@
+<div class="filter">
+    <form id="event_count">
+        <div class="inline-box">
+            <div class="form-inline">
+                <span class="inp-name">Записей на страницу</span>
+                <select name="limit">
+                    <option value="5" <?= ($this->limit == 5) ? 'disabled selected' : '' ;?>>5</option>
+                    <option value="10" <?= ($this->limit == 10) ? 'disabled selected' : '' ;?>>10</option>
+                    <option value="15" <?= ($this->limit == 15) ? 'disabled selected' : '' ;?>>15</option>
+                </select>
+            </div>
+            <div class="form-inline">
+                <span class="inp-name">Дата проведения</span>
+                <input type="date" name="date" value="<?= (isset($_GET['date'])) ? $this->date : ''?>">
+            </div>
+        </div>
+        <button type="submit">Применить</button>
+    </form>
+</div>
 <?php
-    if(empty($this->content['events'])):
-        ?>
-        <div class="col-md-8">
-            <div class="alert alert-danger">
-                <p>Нет событий</p>
-            </div>
-        </div>
-        <?php
-    else:
-        ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <form class="form-inline filter">
-                        <div class="form-group col-md-4">
-                            <select class="form-control" id="event-count" name="events_count">
-                                <option selected disabled value="10">Количество записей на страницу</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="40">40</option>
-                                <option value="50">50</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label for="event-date">Дата встречи</label>
-                            <input type="date" class="form-control" name="events_date" id="event-date">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <button type="submit" class="btn btn-default pull-right">Применить</button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </form>
-                </div>
-        <?php
-        foreach($this->content['events'] as $event):
-            ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?= $event['event_title']?></h3>
-                        <span class="label label-default">Дата провеления: <?= $event['date_event']?></span>
-                        <span class="label label-default">Место провеления: <?= $event['event_place']?></span>
-                    </div>
-                    <div class="panel-body">
-                        <img src="/<?= $event['event_ava']?>" alt="" class="media-object pull-left media-object-small">
-                        <p><?= $event['event_description']?></p>
-                    </div>
-                    <div class="panel-footer">
-                        <a href="#" class="btn btn-info"><?= $event['creator']?></a>
-                        <a class="btn btn-default pull-right" href="/main/event/<?= $event['id']?>" role="button">View details &raquo;</a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            <?php
-        endforeach;
-        ?>
-            </div>
-        </div>
-        <?php
-    endif;
-    //TODO добавить пагинацию
+    if(!empty($this->content['events'])) {
+        foreach ($this->content['events'] as $event) {
+            $event->showEvent();
+        }
+    }else{
+        echo 'nothing found';
+    }
+
+    $this->pagination->showPagination();
 ?>

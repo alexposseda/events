@@ -1,35 +1,196 @@
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
+.wrapper{
+    width: 1000px;
+    margin: 0 auto;
 }
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 50px;
-}
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 71px;
-    background-color: #f5f5f5;
-}
-.media-object-small{
-    width: 64px;
-    height: 64px;
-    margin: 0px 10px 10px 0px;
-}
-.media-object-big{
-    width: 200px;
-    height: 200px;
-    margin: 0px 10px 10px 0px;
-}
-.avatar{
-    width: 100%;
+.header{
+    min-height: 150px;
     margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+.header:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.header h1{
+    padding: 30px 0px 50px 0px;
+    font-size: 36px;
+    text-decoration: none;
+    color: black;
+}
+.header h1:hover{
+    color: red;
+}
+a{
+    color: inherit;
+    text-decoration: inherit;
+}
+ol{
+    list-style-type: decimal;
+    padding-left: 40px;
+}
+.login-box{
+    float: right;
+    padding: 5px;
+    border: 1px solid red;
+}
+.clear{
+    clear: both;
+}
+.form-line{
+    margin-bottom: 5px;
+}
+.form-line input{
+    outline: none;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 3px;
+}
+.form-inline{
+    display: inline-block;
 }
 .filter{
     margin-bottom: 10px;
+}
+.filter .form-inline{
+    margin-right: 20px;
+}
+.login-box button{
+    width: 100%;
+    cursor: pointer;
+}
+.user-box{
+    float: right;
+}
+.pmenu{
+    border: 1px solid black;
+}
+.pmenu li{
+    display: inline-block;
+    border-right: 1px solid black;
+}
+.pmenu li:hover{
+    background-color: grey;
+}
+.pmenu li a{
+    display: block;
+    padding: 10px 5px;
+}
+.main{
+    width: 750px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+.inline-box{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.small-event-box{
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.box-header{
+    margin-bottom: 5px;
+    border-bottom: 1px solid gray;
+}
+.box-body{
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid gray;
+}
+.event-title{
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.box-cover{
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    margin: 5px;
+}
+.info, .more{
+    float: right;
+}
+.button{
+    outline: none;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 3px;
+    background-color: white;
+    padding: 5px 3px;
+}
+.button:hover{
+    background-color: grey;
+}
+.sidebar{
+    width: 245px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+.footer{
+    border-top: 1px solid black;
+    padding-top: 5px;
+}
+#pagination{
+    text-align: center;
+}
+#pagination li{
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #8f8f8f;
+    font-size: 18px;
+}
+#pagination li.pagination-item{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#pagination li a{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 40px;
+    height: 31px;
+    text-align: center;
+    line-height: 31px;
+    /*padding: 5px 10px;*/
+}
+#pagination li.pagination-prev{
+    background: url(../img/left-big-arrow.png) 4px 0px no-repeat;
+    border: none;
+}
+#pagination li.pagination-next{
+    background: url(../img/right-big-arrow.png) 4px 0px no-repeat;
+    border: none;
+}
+#pagination li.pagination-item:hover{
+    -webkit-box-shadow: 0 0 5px 0 #000000;
+    box-shadow: 0px 0px 5px 0 #000000;
+}
+#pagination li.pagination-prev:hover{
+    background-position: 4px -35px;
+}
+#pagination li.pagination-next:hover{
+    background-position: 4px -35px;
+}
+#pagination li.pagination-disabled{
+    width: 40px;
+    height: 31px;
+    background-position: 4px -70px;
+}
+#pagination li.pagination-disabled:hover{
+    background-position: 4px -70px;
+}
+#pagination li.active{
+    background-color: #e30613;
 }

@@ -1,19 +1,22 @@
 <?php
 class Auth{
-    public static function signIn($email, $password){
-        $link = Db::getLink();
+    protected $_auth_status;
+    public static $_access_level;
+    public function __construct(){
+        //TODO function checkCookies must be here!
 
-        $user = $link->select('users', ['id', 'role'])->selectWHERE_AND(['email'=>$email, 'password'=>$password])->sendSelectQuery();
-        if($user->num_rows == 1){
-            $user_data = $user->fetch_assoc();
-            $_SESSION['user_id'] = $user_data['id'];
-            $_SESSION['role'] = $user_data['role'];
-            return true;
+        if(isset($_SESSION['user_id']) and !empty($_SESSION['user_id'])){
+            $this->_auth_status = true;
+            self::$_access_level = $_SESSION['role'];
         }else{
-            return false;
+            $this->_auth_status = false;
+            self::$_access_level = 'guest';
         }
     }
-    public static function checkAuth(){
-        return (isset($_SESSION['user_id']) and !empty($_SESSION['user_id'])) ? true : false ;
+    public static function getAccessLevel(){
+        return self::$_access_level;
+    }
+    public function getAuthStatus(){
+        return $this->_auth_status;
     }
 }

@@ -1,31 +1,20 @@
 <?php
 class Router{
-    public static function start(){
-        $routes = Url::getRoutes();
+    protected $_routes;
 
-        if(!empty($routes[0])){
-            $controller_name = 'Controller_'.ucfirst($routes[0]);
-        }else{
-            $controller_name = 'Controller_Main';
-        }
+    public function __construct(){
+        $this->_routes = explode('/', $_GET['url']);
+    }
+    public function run(){
+        $c_name = (!empty($this->_routes[0])) ? 'Controller_'.ucfirst($this->_routes[0]) : 'Controller_Main' ;
+        $a_name = (isset($this->_routes[1]) and !empty($this->_routes[1])) ? 'action'.ucfirst($this->_routes[1]) : 'actionIndex';
 
-        if(file_exists('core/controllers/'.strtolower($controller_name).'.class.php')) {
-            $controller = new $controller_name;
-        }else{
-            (new Controller())->show404();
-            die();
-        }
+        if(file_exists('core/controllers/'.strtolower($c_name).'.class.php')){
+            $controller = new $c_name();
+            $controller->run($a_name);
 
-        if(isset($routes[1]) and !empty($routes[1])){
-            $action_name = strtolower($routes[1]);
         }else{
-            $action_name = 'index';
-        }
-
-        if(method_exists($controller, $action_name)){
-            $controller->$action_name();
-        }else{
-            $controller->show404();
+            Controller::show404();
         }
     }
 }
