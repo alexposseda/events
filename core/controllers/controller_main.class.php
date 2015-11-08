@@ -14,7 +14,7 @@ class Controller_Main extends Controller{
         $events = $this->_link
             ->select('events', ['id', 'event_title', 'creator', 'event_cover', 'event_description', 'date_create', 'date_event', 'event_participants','event_place'])
             ->selectWHERE_AND(['>date_event' => $this->date])
-            ->selectLIMIT($this->offset, $this->limit)
+            ->selectLIMIT($this->offset*$this->limit, $this->limit)
             ->sendSelectQuery();
         while($row = $events->fetch_assoc()){
             $this->content['events'][] = new Event($row);
