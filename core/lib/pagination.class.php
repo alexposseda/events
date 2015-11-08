@@ -21,7 +21,7 @@ class Pagination{
 		$pages = $this->getPages();
 		if(count($pages) > 1){
 			$active = $this->_offset;
-			include_once '/layouts/templates/pagination.tpl';
+			include_once 'layouts/templates/pagination.tpl';
 		}
 	}
 	protected function getFirstPage(){
