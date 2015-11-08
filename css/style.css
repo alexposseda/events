@@ -194,3 +194,23 @@ ol{
 #pagination li.active{
     background-color: #e30613;
 }
+
+#event_data, #small_modal{
+    position: absolute;
+    width: 500px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px black;
+    top: 50px;
+}
+#close{
+    float: right;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#close:hover{
+    background-color: red;
+}

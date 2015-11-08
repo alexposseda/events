@@ -5,6 +5,8 @@
     <title><?= $this->page_data['title']?></title>
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/js/my.js"></script>
 </head>
 <body>
 <div class="wrapper">

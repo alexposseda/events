@@ -36,7 +36,7 @@
         </p>
     </div>
     <div class="box-footer">
-        <a href="#" class="button more">Принять участие</a>
+        <button class="button more" role="participate" id="event_<?= $this->id?>">Принять участие</button>
         <div class="event-info">
             <p class="event-date">Время проведения: <?= $this->date_event?></p>
             <p class="event-place">Место проведения: <?= $this->event_place?></p>

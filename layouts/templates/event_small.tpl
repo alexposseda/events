@@ -1,6 +1,6 @@
 <div class="small-event-box">
     <div class="box-header">
-        <button class="button info">быстрый просмотр</button>
+        <button class="button info" id="event_<?= $this->id?>" role="show_event_info">быстрый просмотр</button>
         <p class="event-title"><?= $this->event_title?></p>
         <div class="event-info">
             <p class="event-creator">Создатель: <?= $this->creator_login?></p>

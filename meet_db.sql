@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 08 2015 г., 20:51
+-- Время создания: Ноя 08 2015 г., 22:52
 -- Версия сервера: 5.5.45
 -- Версия PHP: 5.4.44
 
@@ -40,14 +40,15 @@ CREATE TABLE IF NOT EXISTS `mt_events` (
   `event_full_cover` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `creater` (`creator`,`date_create`,`date_event`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `mt_events`
 --
 
 INSERT INTO `mt_events` (`id`, `creator`, `date_create`, `date_event`, `event_description`, `event_data`, `event_place`, `event_title`, `event_participants`, `event_cover`, `event_full_cover`) VALUES
-(1, 3, '2015-11-08', '2015-11-10', 'встречаемся в полях!', 'встречаемся в полях, берем трактор и пашем, пашем', 'гдето в полях', 'Тестовая встреча', 1, 'storage/events/event1/thumbs_cover.jpg', 'storage/events/event1/cover.jpg');
+(1, 3, '2015-11-08', '2015-11-10', 'встречаемся в полях!', 'встречаемся в полях, берем трактор и пашем, пашем', 'гдето в полях', 'Тестовая встреча', 2, 'storage/events/event1/thumbs_cover.jpg', 'storage/events/event1/cover.jpg'),
+(2, 1, '2015-11-08', '2015-11-27', 'какой то анонс', 'Описанеи тут', 'на мосту', 'Тестовая встреча 2', 2, 'storage/events/event2/thumbs_cover.jpg', 'storage/events/event2/cover.jpg');
 
 -- --------------------------------------------------------
 
@@ -62,14 +63,17 @@ CREATE TABLE IF NOT EXISTS `mt_participants` (
   `user` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `event_id` (`event_id`,`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `mt_participants`
 --
 
 INSERT INTO `mt_participants` (`id`, `event_id`, `user_id`, `user`) VALUES
-(1, 1, 3, 'user');
+(1, 1, 3, 'user'),
+(2, 2, 1, 'warriorcat'),
+(3, 1, 1, 'warriorcat'),
+(4, 2, 3, 'user');
 
 -- --------------------------------------------------------
 
